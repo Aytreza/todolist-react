@@ -12,12 +12,13 @@ export default function EditTodo({todo, editTodo}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        const { value, isDone } = editedTodo
         const response = await fetch(`https://restapi.fr/api/__todos/${todo._id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(editedTodo)
+            body: JSON.stringify({ value, isDone, isEdited: false })
         })
         console.log(await response.json())
         editTodo(editedTodo)
